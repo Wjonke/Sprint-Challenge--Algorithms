@@ -3,11 +3,11 @@ class SortingRobot:
         """
         SortingRobot takes a list and sorts it.
         """
-        self._list = l          # The list the robot is tasked with sorting
-        self._item = None       # The item the robot is holding
-        self._position = 0      # The list position the robot is at
-        self._light = "OFF"     # The state of the robot's light
-        self._time = 0          # A time counter (stretch)
+        self._list = l  # The list the robot is tasked with sorting
+        self._item = None  # The item the robot is holding
+        self._position = 0  # The list position the robot is at
+        self._light = "OFF"  # The state of the robot's light
+        self._time = 0  # A time counter (stretch)
 
     def can_move_right(self):
         """
@@ -81,11 +81,13 @@ class SortingRobot:
         Turn on the robot's light
         """
         self._light = "ON"
+
     def set_light_off(self):
         """
         Turn off the robot's light
         """
         self._light = "OFF"
+
     def light_is_on(self):
         """
         Returns True if the robot's light is on and False otherwise.
@@ -97,14 +99,76 @@ class SortingRobot:
         Sort the robot's list.
         """
         # Fill this out
-        pass
+        # bubble sort
+        # starting at index 0 "holding" i[0] "standing or looking or comparing" at/to i[1]
+        # item that is "held" is just saved in a variable to be compared to the value
+        # that the "robot" is "standing" at the index of.
+        # If held value is bigger, its going to swap the value it is "standing at" with held value
+        # essentially pushing the smaller value to the left
+        # its going to do this until it gets to the end and drop the value where its no longer larger
+        # and repeat until all values are sorted
+
+
+        self.swap_item()  #swaps values in array
+        self.move_right() # iterate through indexes
+        self.set_light_on()  # bool to turn function on or off
+
+        while self.light_is_on():  #sets condition that bool is true
+
+            self.set_light_off()
+            # turns off condition while we do our check
+            # only turns back on if change made
+            # if it stays False, it just returns what was passed in because its already sorted
+            while self.compare_item() is not None:
+
+                ##############################################################################################
+                ##############################################################################################
+
+                # set up for moving right
+                while self.can_move_right():
+                    if self.compare_item() == 1:
+                        # placeholder
+                        self.swap_item() # swap values
+
+                        self.move_right() # iterate
+
+                        self.set_light_on()
+                        # turn bool back on to continue if successful
+                    else:
+                        self.move_right() # its sorted move to next
+
+                ##############################################################################################
+                ##############################################################################################
+
+                #repeat for moving left
+                while self.can_move_left() and self.compare_item() is not None: # if we can move left in array
+                    if self.compare_item() == 1:
+                        self.swap_item()
+                        self.move_left()
+                        self.set_light_on()
+                    else:
+                        self.move_left() # its sorted move on
+                ##############################################################################################
+                ##############################################################################################
+
+            #if there is a value to compare, start sorting to the right
+            if self.can_move_right():
+                self.swap_item()
+                self.move_right()
+                self.swap_item()
+                self.move_right()
+
+        self.swap_item()
 
 
 if __name__ == "__main__":
     # Test our your implementation from the command line
     # with `python robot_sort.py`
 
-    l = [15, 41, 58, 49, 26, 4, 28, 8, 61, 60, 65, 21, 78, 14, 35, 90, 54, 5, 0, 87, 82, 96, 43, 92, 62, 97, 69, 94, 99, 93, 76, 47, 2, 88, 51, 40, 95, 6, 23, 81, 30, 19, 25, 91, 18, 68, 71, 9, 66, 1, 45, 33, 3, 72, 16, 85, 27, 59, 64, 39, 32, 24, 38, 84, 44, 80, 11, 73, 42, 20, 10, 29, 22, 98, 17, 48, 52, 67, 53, 74, 77, 37, 63, 31, 7, 75, 36, 89, 70, 34, 79, 83, 13, 57, 86, 12, 56, 50, 55, 46]
+    l = [15, 41, 58, 49, 26, 4, 28, 8, 61, 60, 65, 21, 78, 14, 35, 90, 54, 5, 0, 87, 82, 96, 43, 92, 62, 97, 69, 94, 99,
+         93, 76, 47, 2, 88, 51, 40, 95, 6, 23, 81, 30, 19, 25, 91, 18, 68, 71, 9, 66, 1, 45, 33, 3, 72, 16, 85, 27, 59,
+         64, 39, 32, 24, 38, 84, 44, 80, 11, 73, 42, 20, 10, 29, 22, 98, 17, 48, 52, 67, 53, 74, 77, 37, 63, 31, 7, 75,
+         36, 89, 70, 34, 79, 83, 13, 57, 86, 12, 56, 50, 55, 46]
 
     robot = SortingRobot(l)
 
