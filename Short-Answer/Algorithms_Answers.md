@@ -25,4 +25,24 @@ c)
 
 ## Exercise II
 
+##### N  = number of stories - N Story building
+##### starting at base floor 1 (cause gravity and velocity) at what floor do we hit our breakage
+##### egg gets broken if its dropped from floor F floor or above
+#####   if floor >= n(i)  egg will break / else  egg not broken
 
+ 
+    f = 1 (floor we are on)
+    n = (array of floors)
+    
+    while f <= n[highest number] and >= 1 (means we are inside the building) 
+        for i in n: (looping through each floor)
+            if f >= 1 (drop egg)
+                if egg does not break,  
+                f +=1 (increase f by 1 )
+                else:  
+                    return egg broke at floor f
+                
+##### complexity of this is          
+            
+##### we will not actually be able to run this since we dont actually know what floor an egg will break on
+##### YET (quarantine weekend plans confirmed)
